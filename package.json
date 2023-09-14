@@ -1,0 +1,11 @@
+{
+  "name": "revoship-backend",
+  "version": "0.0.0",
+  "description": "Revoship Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Group 20 Semarang",
+  "license": "MIT"
+}
