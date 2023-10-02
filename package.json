@@ -4,8 +4,42 @@
   "description": "Revoship Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch ./index.js",
+    "migrate:up": "sequelize db:migrate",
+    "migrate:undo": "sequelize db:migrate:undo:all",
+    "db:seed:up": "sequelize db:seed:all",
+    "db:seed:down": "sequelize db:seed:undo",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "precommit": "pnpm lint"
   },
   "author": "Group 20 Semarang",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@antfu/eslint-config": "1.0.0-beta.18",
+    "@babel/register": "^7.22.15",
+    "consola": "^3.2.3",
+    "eslint": "^8.50.0",
+    "http-status": "^1.7.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "mysql2": "^3.6.1",
+    "tsx": "^3.13.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "sequelize": "^6.33.0"
+  },
+  "lint-staged": {
+    ".js": [
+      "eslint . --fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
