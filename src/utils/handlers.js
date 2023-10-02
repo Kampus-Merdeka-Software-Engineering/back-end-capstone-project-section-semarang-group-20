@@ -1,7 +1,7 @@
 /**
  * Create a response object for HTTP responses.
  *
- * @param {boolean} isSuccess - Indicates whether the operation was successful.
+ * @param {boolean} success - Indicates whether the operation was successful.
  * @param {number} code - The HTTP response status code.
  * @param {string} message - A descriptive message about the response.
  * @param {any} data - The data to include in the response.

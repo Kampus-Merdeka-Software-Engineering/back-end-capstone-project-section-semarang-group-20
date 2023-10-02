@@ -1,3 +1,4 @@
+const { consola } = require('consola')
 /**
  * Custom error class for API errors.
  */
@@ -17,7 +18,7 @@ class APIError extends Error {
  * @returns {APIError} An instance of the APIError class.
  */
 const createAPIError = (statusCode, message) => {
-  return new APIError(statusCode, message);
+  return new APIError(statusCode, consola.error(message));
 };
 
 module.exports = {

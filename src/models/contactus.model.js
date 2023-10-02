@@ -65,7 +65,7 @@ const retrieveAll = async ({ skip = 0, limit = 10 }) => {
 
     return resHandler(
       true,
-      httpStatus[200],
+      httpStatus["OK"],
       "Success retrieve contact us data",
       data
     );
@@ -73,7 +73,7 @@ const retrieveAll = async ({ skip = 0, limit = 10 }) => {
     /**
      * @type {APIError}
      */
-    const err = createAPIError(httpStatus[400], e.message);
+    const err = createAPIError(httpStatus["BAD_REQUEST"], e.message);
     throw err;
   }
 };
