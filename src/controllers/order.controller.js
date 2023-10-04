@@ -56,14 +56,33 @@ const get = async (req, res) => {
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
 const add = async (req, res) => {
-  const { name, email, company_name, message } = req.body;
+  const {
+    jenis_layanan,
+    alamat,
+    berat_barang,
+    harga_pengiriman,
+  } = req.body;
+
+  const randomizeReceipt = () => {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let receipt = "RSV-";
+
+    for (let i = 0; i < 11; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      receipt += randomIndex;
+    }
+    return receipt;
+  };
+
   try {
     const data = {
       id: nanoid(30),
-      name,
-      email,
-      company_name,
-      message,
+      jenis_layanan,
+      tanggal_pengiriman: new Date(),
+      nomor_resi: randomizeReceipt(),
+      alamat,
+      berat_barang,
+      harga_pengiriman,
       created_at: new Date(),
     };
 
