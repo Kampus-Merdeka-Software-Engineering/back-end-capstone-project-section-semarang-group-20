@@ -15,7 +15,7 @@ class APIError extends Error {
  *
  * @param {number} statusCode - The HTTP status code for the error.
  * @param {string} message - The error message.
- * @returns {APIError} An instance of the APIError class.
+ * @returns {import("../utils/ApiError").APIError} An instance of the APIError class.
  */
 const createAPIError = (statusCode, message) => {
   return new APIError(statusCode, consola.error(message));

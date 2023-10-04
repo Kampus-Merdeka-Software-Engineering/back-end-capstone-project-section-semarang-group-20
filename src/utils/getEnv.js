@@ -1,5 +1,6 @@
 const { consola, createConsola } = require("consola");
 const dotenv = require("dotenv");
+const path = require("path")
 
 dotenv.config();
 

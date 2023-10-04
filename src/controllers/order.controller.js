@@ -1,10 +1,10 @@
-const ContactUs = require("../models/contactus.model");
+const Order = require("../models/order.model");
 const httpStatus = require("http-status");
 const { nanoid } = require("nanoid");
 const { createAPIError } = require("../utils/ApiError");
 const { resHandler } = require("../utils/handlers");
 
-const { ContactUsModel, retrieveAll, getOneData } = ContactUs;
+const { OrderModel, retrieveAll, getOneData } = Order;
 
 /**
  * Handle an HTTP GET request to retrieve a list of items with optional pagination.
@@ -28,7 +28,7 @@ const list = async (req, res) => {
 };
 
 /**
- * Handle an HTTP GET request to retrieve a ContactUs record by its ID.
+ * Handle an HTTP GET request to retrieve a Order record by its ID.
  *
  * @param {import('express').Request} req - The Express request object containing the ID parameter.
  * @param {import('express').Response} res - The Express response object to send the retrieved data.
@@ -49,7 +49,7 @@ const get = async (req, res) => {
 };
 
 /**
- * Handle an HTTP POST request to add a new ContactUs record.
+ * Handle an HTTP POST request to add a new Order record.
  *
  * @param {import('express').Request} req - The Express request object containing the data to be added.
  * @param {import('express').Response} res - The Express response object to send the result of the operation.
@@ -67,7 +67,7 @@ const add = async (req, res) => {
       created_at: new Date(),
     };
 
-    const createdData = await ContactUsModel.create(data);
+    const createdData = await OrderModel.create(data);
 
     return res
       .status(httpStatus["CREATED"])
