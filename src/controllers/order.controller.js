@@ -1,5 +1,5 @@
 const httpStatus = require('http-status')
-const { nanoid } = require('nanoid')
+const { uuid } = require('uuidv4')
 const Order = require('../models/order.model')
 const { createAPIError } = require('../utils/ApiError')
 const { resHandler } = require('../utils/handlers')
@@ -75,7 +75,7 @@ async function add(req, res) {
 
   try {
     const data = {
-      id: nanoid(30),
+      id: uuid(),
       jenis_layanan,
       tanggal_pengiriman: new Date(),
       nomor_resi: randomizeReceipt(),

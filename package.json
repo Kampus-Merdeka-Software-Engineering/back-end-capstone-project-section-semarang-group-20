@@ -1,6 +1,6 @@
 {
   "name": "revoship-backend",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Revoship Backend",
   "author": "Group 20 Semarang",
   "license": "MIT",
@@ -21,7 +21,8 @@
     "express": "^4.18.2",
     "sequelize": "^6.33.0",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@antfu/eslint-config": "1.0.0-beta.18",
@@ -33,7 +34,6 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "mysql2": "^3.6.1",
-    "nanoid": "^5.0.1",
     "tsx": "^3.13.0"
   },
   "husky": {

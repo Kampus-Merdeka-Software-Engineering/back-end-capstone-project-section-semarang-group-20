@@ -1,5 +1,5 @@
 const httpStatus = require('http-status')
-const { nanoid } = require('nanoid')
+const { uuid } = require('uuidv4')
 const ContactUs = require('../models/contactus.model')
 const { createAPIError } = require('../utils/ApiError')
 const { resHandler } = require('../utils/handlers')
@@ -63,7 +63,7 @@ async function add(req, res) {
   const { name, email, company_name, message } = req.body
   try {
     const data = {
-      id: nanoid(30),
+      id: uuid(),
       name,
       email,
       company_name,
