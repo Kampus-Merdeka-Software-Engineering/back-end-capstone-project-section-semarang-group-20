@@ -13,7 +13,7 @@
     "db:seed:down": "sequelize db:seed:undo",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "precommit": "pnpm lint"
+    "precommit": "npm run lint"
   },
   "dependencies": {
     "cors": "^2.8.5",
