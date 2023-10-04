@@ -1,6 +1,7 @@
-const { validate: expressValidate , Joi} = require("express-validation");
+const { validate: expressValidate, Joi } = require('express-validation')
 
-const validator = (schema) =>
-  expressValidate(schema, { keyByField: true }, { abortEarly: false });
+function validator(schema) {
+  return expressValidate(schema, { keyByField: true }, { abortEarly: false })
+}
 
-module.exports = { validator, Joi };
+module.exports = { validator, Joi }

@@ -1,10 +1,10 @@
-const ContactUs = require("../models/contactus.model");
-const httpStatus = require("http-status");
-const { nanoid } = require("nanoid");
-const { createAPIError } = require("../utils/ApiError");
-const { resHandler } = require("../utils/handlers");
+const httpStatus = require('http-status')
+const { nanoid } = require('nanoid')
+const ContactUs = require('../models/contactus.model')
+const { createAPIError } = require('../utils/ApiError')
+const { resHandler } = require('../utils/handlers')
 
-const { ContactUsModel, retrieveAll, getOneData } = ContactUs;
+const { ContactUsModel, retrieveAll, getOneData } = ContactUs
 
 /**
  * Handle an HTTP GET request to retrieve a list of items with optional pagination.
@@ -13,19 +13,20 @@ const { ContactUsModel, retrieveAll, getOneData } = ContactUs;
  * @param {import('express').Response} res - The Express response object.
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
-const list = async (req, res) => {
-  const { limit = 10, skip = 0 } = req.query;
+async function list(req, res) {
+  const { limit = 10, skip = 0 } = req.query
   try {
-    const data = await retrieveAll({ skip, limit });
-    return res.status(httpStatus["OK"]).json(data);
-  } catch (e) {
+    const data = await retrieveAll({ skip, limit })
+    return res.status(httpStatus.OK).json(data)
+  }
+  catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus["INTERNAL_SERVER_ERROR"], e.message);
-    return Promise.reject(err);
+    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message)
+    return Promise.reject(err)
   }
-};
+}
 
 /**
  * Handle an HTTP GET request to retrieve a ContactUs record by its ID.
@@ -34,21 +35,22 @@ const list = async (req, res) => {
  * @param {import('express').Response} res - The Express response object to send the retrieved data.
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
-const get = async (req, res) => {
-  const { id } = req.params;
+async function get(req, res) {
+  const { id } = req.params
   try {
-    const data = await getOneData(id);
+    const data = await getOneData(id)
     return res
-      .status(data ? httpStatus["OK"] : httpStatus["NOT_FOUND"])
-      .json(data);
-  } catch (e) {
+      .status(data ? httpStatus.OK : httpStatus.NOT_FOUND)
+      .json(data)
+  }
+  catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus["INTERNAL_SERVER_ERROR"], e.message);
-    return Promise.reject(err);
+    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message)
+    return Promise.reject(err)
   }
-};
+}
 
 /**
  * Handle an HTTP POST request to add a new ContactUs record.
@@ -57,8 +59,8 @@ const get = async (req, res) => {
  * @param {import('express').Response} res - The Express response object to send the result of the operation.
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
-const add = async (req, res) => {
-  const { name, email, company_name, message } = req.body;
+async function add(req, res) {
+  const { name, email, company_name, message } = req.body
   try {
     const data = {
       id: nanoid(30),
@@ -67,27 +69,28 @@ const add = async (req, res) => {
       company_name,
       message,
       created_at: new Date(),
-    };
+    }
 
-    const createdData = await ContactUsModel.create(data);
+    const createdData = await ContactUsModel.create(data)
 
     return res
-      .status(httpStatus["CREATED"])
+      .status(httpStatus.CREATED)
       .json(
         resHandler(
           true,
-          httpStatus["CREATED"],
-          "Successfully send data",
-          createdData
-        )
-      );
-  } catch (e) {
+          httpStatus.CREATED,
+          'Successfully send data',
+          createdData,
+        ),
+      )
+  }
+  catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus[500], e.message);
-    return Promise.reject(err);
+    const err = createAPIError(httpStatus[500], e.message)
+    return Promise.reject(err)
   }
-};
+}
 
-module.exports = { list, add, get };
+module.exports = { list, add, get }

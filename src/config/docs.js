@@ -1,17 +1,17 @@
-const { getVariables } = require("../utils/getEnv");
+const { getVariables } = require('../utils/getEnv')
 
-const PORT = getVariables("PORT");
+const PORT = getVariables('PORT')
 
 module.exports = {
   definition: {
-    openapi: "3.1.0",
+    openapi: '3.1.0',
     info: {
-      title: "RevoShip API",
-      version: "1.0.0",
-      description: "RevoShip Documentation API",
+      title: 'RevoShip API',
+      version: '1.0.0',
+      description: 'RevoShip Documentation API',
       license: {
-        name: "MIT",
-        url: "https://spdx.org/licenses/MIT.html",
+        name: 'MIT',
+        url: 'https://spdx.org/licenses/MIT.html',
       },
     },
     servers: [
@@ -20,5 +20,5 @@ module.exports = {
       },
     ],
   },
-  apis: ["./src/routes/*.router.js"],
-};
+  apis: ['./src/routes/*.router.js'],
+}

@@ -1,7 +1,7 @@
-const { config } = require("./db.config.js");
+const { config } = require('./db.config.js')
 
-const { DATABASE: db } = config;
+const { DATABASE: db } = config
 
 module.exports = {
   development: db,
-};
+}

@@ -1,9 +1,9 @@
-"use strict";
+'use strict'
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("order", {
+    await queryInterface.createTable('order', {
       id: {
         type: Sequelize.UUID,
         allowNull: false,
@@ -11,7 +11,7 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
       },
       jenis_layanan: {
-        type: Sequelize.ENUM(["reguler", "kilat"]),
+        type: Sequelize.ENUM(['reguler', 'kilat']),
         allowNull: false,
       },
       tanggal_pengiriman: {
@@ -42,10 +42,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-    });
+    })
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("order")
+  async down(queryInterface) {
+    await queryInterface.dropTable('order')
   },
-};
+}

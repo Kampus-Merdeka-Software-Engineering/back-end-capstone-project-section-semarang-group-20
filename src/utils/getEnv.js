@@ -1,8 +1,8 @@
-const { consola, createConsola } = require("consola");
-const dotenv = require("dotenv");
-const path = require("path")
+const process = require('node:process')
+const { consola } = require('consola')
+const dotenv = require('dotenv')
 
-dotenv.config();
+dotenv.config()
 
 /**
  * Get the value of an environment variable.
@@ -11,17 +11,17 @@ dotenv.config();
  * @returns {string} The value of the environment variable.
  * @throws {Error} If the environment variable is not specified.
  */
-const getVariables = (key) => {
-  const value = process.env[key];
+function getVariables(key) {
+  const value = process.env[key]
 
   if (value === undefined) {
-    consola.error(`ENVIRONMENT VARIABLE ${key} IS NOT SPECIFIED`);
-    throw new Error(`ENVIRONMENT VARIABLE ${key} IS NOT SPECIFIED`);
+    consola.error(`ENVIRONMENT VARIABLE ${key} IS NOT SPECIFIED`)
+    throw new Error(`ENVIRONMENT VARIABLE ${key} IS NOT SPECIFIED`)
   }
 
-  return value;
-};
+  return value
+}
 
 module.exports = {
   getVariables,
-};
+}

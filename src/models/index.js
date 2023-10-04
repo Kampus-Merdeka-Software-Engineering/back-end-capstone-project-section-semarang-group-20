@@ -1,1 +1,1 @@
-module.exports = require('./contactus.model.mjs');
+module.exports = require('./contactus.model.mjs')

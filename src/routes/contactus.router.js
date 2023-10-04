@@ -1,8 +1,8 @@
-const express = require("express");
-const { list, add, get } = require("../controllers/contactus.controller");
-const { validator, Joi } = require("../utils/validator");
+const express = require('express')
+const { list, add, get } = require('../controllers/contactus.controller')
+const { validator, Joi } = require('../utils/validator')
 
-const router = express.Router();
+const router = express.Router()
 
 const paramValidation = {
   body: Joi.object({
@@ -11,7 +11,7 @@ const paramValidation = {
     company_name: Joi.string().required(),
     message: Joi.string().required(),
   }),
-};
+}
 
 /**
  * @swagger
@@ -90,7 +90,7 @@ const paramValidation = {
  *                     createdAt: "2023-10-04T10:07:05.000Z"
  *                     updatedAt: "2023-10-04T10:07:05.000Z"
  */
-router.route("/").get(list);
+router.route('/').get(list)
 
 /**
  * @swagger
@@ -173,7 +173,7 @@ router.route("/").get(list);
  *                   createdAt: "2023-10-04T10:07:05.000Z"
  *                   updatedAt: "2023-10-04T10:07:05.000Z"
  */
-router.route("/:id").get(get);
+router.route('/:id').get(get)
 
 /**
  * @swagger
@@ -252,6 +252,6 @@ router.route("/:id").get(get);
  *                    createdAt: "2023-10-04T10:07:05.000Z"
  *                    updatedAt: "2023-10-04T10:07:05.000Z"
  */
-router.route("/").post(validator(paramValidation), add);
+router.route('/').post(validator(paramValidation), add)
 
-module.exports = router;
+module.exports = router

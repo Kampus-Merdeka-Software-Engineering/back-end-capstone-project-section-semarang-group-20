@@ -1,8 +1,8 @@
-const { Sequelize } = require("sequelize");
-const { consola } = require("consola");
-const { config } = require("./db.config.js");
+const { Sequelize } = require('sequelize')
+const { consola } = require('consola')
+const { config } = require('./db.config.js')
 
-const { DATABASE: dbConfig } = config;
+const { DATABASE: dbConfig } = config
 
 const sequelize = new Sequelize(
   dbConfig.database,
@@ -21,16 +21,16 @@ const sequelize = new Sequelize(
       acquire: 30000,
       idle: 10000,
     },
-  }
-);
+  },
+)
 
 sequelize
   .authenticate()
   .then(() => {
-    consola.start("Connection has been established successfully!");
+    consola.start('Connection has been established successfully!')
   })
   .catch((err) => {
-    consola.error("Unable to connect to the database", err);
-  });
+    consola.error('Unable to connect to the database', err)
+  })
 
-exports.sequelize = sequelize;
+exports.sequelize = sequelize

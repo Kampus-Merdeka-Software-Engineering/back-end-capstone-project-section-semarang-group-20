@@ -1,17 +1,17 @@
-const express = require("express");
-const { list, add, get } = require("../controllers/order.controller");
-const { validator, Joi } = require("../utils/validator");
+const express = require('express')
+const { list, add, get } = require('../controllers/order.controller')
+const { validator, Joi } = require('../utils/validator')
 
-const router = express.Router();
+const router = express.Router()
 
 const paramValidation = {
   body: Joi.object({
-    jenis_layanan: Joi.string().valid("kilat", "reguler").required(),
+    jenis_layanan: Joi.string().valid('kilat', 'reguler').required(),
     alamat: Joi.string().required(),
     berat_barang: Joi.number().required(),
     harga_pengiriman: Joi.number().required(),
   }),
-};
+}
 
 /**
  * @swagger
@@ -109,7 +109,7 @@ const paramValidation = {
  *                     createdAt: "2023-10-04T10:29:02.000Z"
  *                     updatedAt: "2023-10-04T10:29:02.000Z"
  */
-router.route("/").get(list);
+router.route('/').get(list)
 
 /**
  * @swagger
@@ -202,7 +202,7 @@ router.route("/").get(list);
  *                   createdAt: "2023-10-04T10:07:05.000Z"
  *                   updatedAt: "2023-10-04T10:07:05.000Z"
  */
-router.route("/:id").get(get);
+router.route('/:id').get(get)
 
 /**
  * @swagger
@@ -313,6 +313,6 @@ router.route("/:id").get(get);
  *                   createdAt: "2023-10-04T15:23:54.057Z"
  *                   updatedAt: "2023-10-04T15:23:54.057Z"
  */
-router.route("/").post(validator(paramValidation), add);
+router.route('/').post(validator(paramValidation), add)
 
-module.exports = router;
+module.exports = router

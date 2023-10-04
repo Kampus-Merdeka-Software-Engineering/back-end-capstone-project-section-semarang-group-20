@@ -1,11 +1,11 @@
-const { DataTypes } = require("sequelize");
-const httpStatus = require("http-status");
-const { createAPIError } = require("../utils/ApiError");
-const { resHandler } = require("../utils/handlers");
-const { sequelize: db } = require("../config/db.js");
+const { DataTypes } = require('sequelize')
+const httpStatus = require('http-status')
+const { createAPIError } = require('../utils/ApiError')
+const { resHandler } = require('../utils/handlers')
+const { sequelize: db } = require('../config/db.js')
 
 const ContactUsModel = db.define(
-  "contactus",
+  'contactus',
   {
     id: {
       type: DataTypes.UUID,
@@ -40,82 +40,84 @@ const ContactUsModel = db.define(
   },
   {
     db,
-    tableName: "contact-us",
+    tableName: 'contact-us',
     underscored: true,
     timestamps: true,
-  }
-);
+  },
+)
 
 /**
  * Retrieve a list of ContactUs records with optional pagination.
  *
  * @async
- * @param {Object} options - Options for pagination.
- * @param {number} [options.skip=0] - The number of records to skip.
- * @param {number} [options.limit=10] - The maximum number of records to return.
+ * @param {object} options - Options for pagination.
+ * @param {number} [options.skip] - The number of records to skip.
+ * @param {number} [options.limit] - The maximum number of records to return.
  * @returns {Promise<Array>} A Promise that resolves to an array of ContactUs records.
  * @throws {import("../utils/ApiError").APIError} If an error occurs while retrieving the records.
  */
-const retrieveAll = async ({ skip = 0, limit = 10 }) => {
+async function retrieveAll({ skip = 0, limit = 10 }) {
   try {
     const data = await ContactUsModel.findAll({
       limit,
       offset: skip,
-    });
+    })
 
     return resHandler(
       true,
-      httpStatus["OK"],
-      "Success retrieve contact us data",
-      data
-    );
-  } catch (e) {
+      httpStatus.OK,
+      'Success retrieve contact us data',
+      data,
+    )
+  }
+  catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus["INTERNAL_SERVER_ERROR"], e.message);
-    throw err;
+    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message)
+    throw err
   }
-};
+}
 
 /**
  * Retrieve a single ContactUs record by its ID.
  *
  * @async
  * @param {string} id - The unique identifier of the ContactUs record to retrieve.
- * @returns {Promise<Object>} A Promise that resolves to a response object containing the retrieved ContactUs record.
+ * @returns {Promise<object>} A Promise that resolves to a response object containing the retrieved ContactUs record.
  * @throws {import("../utils/ApiError").APIError} If an error occurs while retrieving the record or if the record is not found.
  */
-const getOneData = async (id) => {
+async function getOneData(id) {
   try {
     const data = await ContactUsModel.findOne({
       where: { id },
-    });
+    })
 
     if (!data) {
       return resHandler(
         false,
-        httpStatus["NOT_FOUND"],
-        "Contact us data not found!"
-      );
+        httpStatus.NOT_FOUND,
+        'Contact us data not found!',
+      )
     }
 
     return resHandler(
       true,
-      httpStatus["OK"],
-      "Success get data contact us",
-      data
-    );
-  } catch (e) {
+      httpStatus.OK,
+      'Success get data contact us',
+      data,
+    )
+  }
+  catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus["BAD_REQUEST"], e.message);
-    throw err;
+    const err = createAPIError(httpStatus.BAD_REQUEST, e.message)
+    throw err
   }
-};
+}
 
 /**
  * @typedef {import('sequelize').Model} ContactUsModel
  */
-module.exports = { ContactUsModel, retrieveAll, getOneData };
+module.exports = { ContactUsModel, retrieveAll, getOneData }
