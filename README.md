@@ -1,4 +1,4 @@
-# Under Construction
+# RevoShip API
 
 - Group Leader: I Gusti Ngurah Satya Wikananda
 - Backend Developer: Muhamad Irfan Rosadi & Gusti Ayu Putu Lidya Listiari
