@@ -18,6 +18,9 @@ module.exports = {
       {
         url: `http://localhost:${PORT}`,
       },
+      {
+        url: 'https://be-semarang-20-production.up.railway.app',
+      },
     ],
   },
   apis: ['./src/routes/*.router.js'],
