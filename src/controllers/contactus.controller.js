@@ -38,7 +38,9 @@ const get = async (req, res) => {
   const { id } = req.params;
   try {
     const data = await getOneData(id);
-    return res.status(httpStatus["OK"]).json(data);
+    return res
+      .status(data ? httpStatus["OK"] : httpStatus["NOT_FOUND"])
+      .json(data);
   } catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}

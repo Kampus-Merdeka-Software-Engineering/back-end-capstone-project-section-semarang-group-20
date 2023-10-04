@@ -100,12 +100,15 @@ const getOneData = async (id) => {
       where: { id },
     });
 
-    return resHandler(
-      true,
-      httpStatus["OK"],
-      "Success get data order",
-      data
-    );
+    if (!data) {
+      return resHandler(
+        false,
+        httpStatus["NOT_FOUND"],
+        "Contact us data not found!"
+      );
+    }
+
+    return resHandler(true, httpStatus["OK"], "Success get data order", data);
   } catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}

@@ -92,6 +92,14 @@ const getOneData = async (id) => {
       where: { id },
     });
 
+    if (!data) {
+      return resHandler(
+        false,
+        httpStatus["NOT_FOUND"],
+        "Contact us data not found!"
+      );
+    }
+
     return resHandler(
       true,
       httpStatus["OK"],
