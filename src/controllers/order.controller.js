@@ -1,10 +1,10 @@
-const httpStatus = require('http-status')
-const { uuid } = require('uuidv4')
-const Order = require('../models/order.model')
-const { createAPIError } = require('../utils/ApiError')
-const { resHandler } = require('../utils/handlers')
+const httpStatus = require("http-status");
+const { uuid } = require("uuidv4");
+const Order = require("../models/order.model");
+const { createAPIError } = require("../utils/ApiError");
+const { resHandler } = require("../utils/handlers");
 
-const { OrderModel, retrieveAll, getOneData } = Order
+const { OrderModel, retrieveAll, getOneData } = Order;
 
 /**
  * Handle an HTTP GET request to retrieve a list of items with optional pagination.
@@ -14,17 +14,16 @@ const { OrderModel, retrieveAll, getOneData } = Order
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
 async function list(req, res) {
-  const { limit = 10, skip = 0 } = req.query
+  const { limit = 10, skip = 0 } = req.query;
   try {
-    const data = await retrieveAll({ skip, limit })
-    return res.status(httpStatus.OK).json(data)
-  }
-  catch (e) {
+    const data = await retrieveAll({ skip, limit });
+    return res.status(httpStatus.OK).json(data);
+  } catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message)
-    return Promise.reject(err)
+    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message);
+    return Promise.reject(err);
   }
 }
 
@@ -36,19 +35,16 @@ async function list(req, res) {
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
 async function get(req, res) {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const data = await getOneData(id)
-    return res
-      .status(data ? httpStatus.OK : httpStatus.NOT_FOUND)
-      .json(data)
-  }
-  catch (e) {
+    const data = await getOneData(id);
+    return res.status(data ? httpStatus.OK : httpStatus.NOT_FOUND).json(data);
+  } catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message)
-    return Promise.reject(err)
+    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message);
+    return Promise.reject(err);
   }
 }
 
@@ -60,18 +56,29 @@ async function get(req, res) {
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
 async function add(req, res) {
-  const { jenis_layanan, alamat, berat_barang, harga_pengiriman } = req.body
+  const {
+    jenis_layanan,
+    alamat,
+    berat_barang,
+    harga_pengiriman,
+    nama_pengirim,
+    nama_penerima,
+    alamat_asal,
+    no_telpon,
+  } = req.body;
+  console.log(req.body)
+  console.log('hehe')
 
   const randomizeReceipt = () => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-    let receipt = 'RSV-'
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let receipt = "RSV-";
 
     for (let i = 0; i < 11; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length)
-      receipt += randomIndex
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      receipt += randomIndex;
     }
-    return receipt
-  }
+    return receipt;
+  };
 
   try {
     const data = {
@@ -82,10 +89,15 @@ async function add(req, res) {
       alamat,
       berat_barang,
       harga_pengiriman,
+      nama_pengirim,
+      nama_penerima,
+      alamat_asal,
+      no_telpon,
       created_at: new Date(),
-    }
+    };
 
-    const createdData = await OrderModel.create(data)
+
+    const createdData = await OrderModel.create(data);
 
     return res
       .status(httpStatus.CREATED)
@@ -93,18 +105,19 @@ async function add(req, res) {
         resHandler(
           true,
           httpStatus.CREATED,
-          'Successfully send data',
-          createdData,
-        ),
-      )
-  }
-  catch (e) {
+          "Successfully send data",
+          createdData
+        )
+      );
+  } catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus[500], e.message)
-    return Promise.reject(err)
+    console.error(e)
+    console.log('hehe')
+    const err = createAPIError(httpStatus[500], e.message);
+    return Promise.reject(err);
   }
 }
 
-module.exports = { list, add, get }
+module.exports = { list, add, get };

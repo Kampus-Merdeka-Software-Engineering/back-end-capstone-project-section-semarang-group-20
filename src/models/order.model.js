@@ -37,6 +37,22 @@ const OrderModel = db.define(
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
+    nama_pengirim: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    nama_penerima: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    alamat_asal: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    no_telpon: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
