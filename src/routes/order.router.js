@@ -58,10 +58,14 @@ const paramValidation = {
  *                         type: string
  *                         description: The type of service.
  *                         example: "kilat"
+ *                       status:
+ *                         type: string
+ *                         description: The status of the order.
+ *                         example: "proses"
  *                       tanggal_pengiriman:
  *                         type: string
  *                         description: The date and time of shipment.
- *                         example: "2023-10-04T10:07:05.000Z"
+ *                         example: "2023-10-06T10:16:49.000Z"
  *                       nomor_resi:
  *                         type: string
  *                         description: The shipment tracking number.
@@ -78,16 +82,32 @@ const paramValidation = {
  *                         type: string
  *                         description: The shipping cost.
  *                         example: "20"
+ *                       nama_pengirim:
+ *                         type: string
+ *                         description: The name of the sender.
+ *                         example: "Satya"
+ *                       nama_penerima:
+ *                         type: string
+ *                         description: The name of the recipient.
+ *                         example: "Gita"
+ *                       alamat_asal:
+ *                         type: string
+ *                         description: The origin address.
+ *                         example: "Jakarta"
+ *                       no_telpon:
+ *                         type: string
+ *                         description: The contact number.
+ *                         example: "08221234542"
  *                       createdAt:
  *                         type: string
  *                         format: date
  *                         description: The date and time when the order entry was created.
- *                         example: "2023-10-04T10:07:05.000Z"
+ *                         example: "2023-10-06T10:16:49.000Z"
  *                       updatedAt:
  *                         type: string
  *                         format: date
  *                         description: The date and time when the order entry was last updated.
- *                         example: "2023-10-04T10:07:05.000Z"
+ *                         example: "2023-10-06T10:16:49.000Z"
  *               example:
  *                 success: true
  *                 code: 200
@@ -95,40 +115,50 @@ const paramValidation = {
  *                 data:
  *                   - id: "6877717b-64c0-4899-b494-92efd85fd41a"
  *                     jenis_layanan: "kilat"
- *                     tanggal_pengiriman: "2023-10-04T10:07:05.000Z"
+ *                     status: "proses"
+ *                     tanggal_pengiriman: "2023-10-06T10:16:49.000Z"
  *                     nomor_resi: "RVS-1234567890"
  *                     alamat: "Denpasar"
  *                     berat_barang: "20"
  *                     harga_pengiriman: "20"
- *                     createdAt: "2023-10-04T10:07:05.000Z"
- *                     updatedAt: "2023-10-04T10:07:05.000Z"
- *                   - id: "RZ2ndeFGuRI7YkE5Ku-r9bJQzsX7i4"
+ *                     nama_pengirim: "Satya"
+ *                     nama_penerima: "Gita"
+ *                     alamat_asal: "Jakarta"
+ *                     no_telpon: "08221234542"
+ *                     createdAt: "2023-10-06T10:16:49.000Z"
+ *                     updatedAt: "2023-10-06T10:16:49.000Z"
+ *                   - id: "a9fdb463-6d8c-45ee-94e1-0d0bc5403e0d"
  *                     jenis_layanan: "kilat"
- *                     tanggal_pengiriman: "2023-10-04T10:29:02.000Z"
- *                     nomor_resi: "RSV-23434117266023232"
- *                     alamat: "denpasar"
+ *                     status: "proses"
+ *                     tanggal_pengiriman: "2023-10-06T10:43:18.000Z"
+ *                     nomor_resi: "RSV-15273133212017312826"
+ *                     alamat: "Denpasar"
  *                     berat_barang: "20"
- *                     harga_pengiriman: "2000000"
- *                     createdAt: "2023-10-04T10:29:02.000Z"
- *                     updatedAt: "2023-10-04T10:29:02.000Z"
+ *                     harga_pengiriman: "200000"
+ *                     nama_pengirim: "Gita"
+ *                     nama_penerima: "Satya"
+ *                     alamat_asal: "Jakarta"
+ *                     no_telpon: "08213472364"
+ *                     createdAt: "2023-10-06T10:43:18.000Z"
+ *                     updatedAt: "2023-10-06T10:43:18.000Z"
  */
 router.route('/').get(list)
 
 /**
  * @swagger
- * /api/order/{id}:
+ * /api/order/:receiptId:
  *   get:
- *     summary: Get order data by ID.
- *     description: Retrieve order data for a specific order entry by its ID.
+ *     summary: Get order data by receipt ID.
+ *     description: Retrieve order data for a specific order entry by its receipt ID.
  *     tags:
  *       - Order
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: receiptId
  *         schema:
  *           type: string
  *         required: true
- *         description: The unique identifier of the order entry.
+ *         description: The unique receipt identifier of the order entry.
  *     responses:
  *       200:
  *         description: Successful response with order data.
@@ -160,10 +190,14 @@ router.route('/').get(list)
  *                       type: string
  *                       description: The type of service.
  *                       example: "kilat"
+ *                     status:
+ *                       type: string
+ *                       description: The status of the order.
+ *                       example: "proses"
  *                     tanggal_pengiriman:
  *                       type: string
  *                       description: The date and time of shipment.
- *                       example: "2023-10-04T10:07:05.000Z"
+ *                       example: "2023-10-06T10:16:49.000Z"
  *                     nomor_resi:
  *                       type: string
  *                       description: The shipment tracking number.
@@ -180,16 +214,32 @@ router.route('/').get(list)
  *                       type: string
  *                       description: The shipping cost.
  *                       example: "20"
+ *                     nama_pengirim:
+ *                       type: string
+ *                       description: The name of the sender.
+ *                       example: "Satya"
+ *                     nama_penerima:
+ *                       type: string
+ *                       description: The name of the recipient.
+ *                       example: "Gita"
+ *                     alamat_asal:
+ *                       type: string
+ *                       description: The origin address.
+ *                       example: "Jakarta"
+ *                     no_telpon:
+ *                       type: string
+ *                       description: The contact number.
+ *                       example: "08221234542"
  *                     createdAt:
  *                       type: string
  *                       format: date
  *                       description: The date and time when the order entry was created.
- *                       example: "2023-10-04T10:07:05.000Z"
+ *                       example: "2023-10-06T10:16:49.000Z"
  *                     updatedAt:
  *                       type: string
  *                       format: date
  *                       description: The date and time when the order entry was last updated.
- *                       example: "2023-10-04T10:07:05.000Z"
+ *                       example: "2023-10-06T10:16:49.000Z"
  *               example:
  *                 success: true
  *                 code: 200
@@ -197,19 +247,24 @@ router.route('/').get(list)
  *                 data:
  *                   id: "6877717b-64c0-4899-b494-92efd85fd41a"
  *                   jenis_layanan: "kilat"
- *                   tanggal_pengiriman: "2023-10-04T10:07:05.000Z"
+ *                   status: "proses"
+ *                   tanggal_pengiriman: "2023-10-06T10:16:49.000Z"
  *                   nomor_resi: "RVS-1234567890"
  *                   alamat: "Denpasar"
  *                   berat_barang: "20"
  *                   harga_pengiriman: "20"
- *                   createdAt: "2023-10-04T10:07:05.000Z"
- *                   updatedAt: "2023-10-04T10:07:05.000Z"
+ *                   nama_pengirim: "Satya"
+ *                   nama_penerima: "Gita"
+ *                   alamat_asal: "Jakarta"
+ *                   no_telpon: "08221234542"
+ *                   createdAt: "2023-10-06T10:16:49.000Z"
+ *                   updatedAt: "2023-10-06T10:16:49.000Z"
  */
 router.route('/:receiptId').get(get)
 
 /**
  * @swagger
- * /api/order:
+ * /order:
  *   post:
  *     summary: Create a new order.
  *     description: Create a new order entry with the provided information.
@@ -226,20 +281,43 @@ router.route('/:receiptId').get(get)
  *               jenis_layanan:
  *                 type: string
  *                 description: The type of service.
+ *               alamat:
+ *                 type: string
+ *                 description: The delivery address.
  *               berat_barang:
  *                 type: number
  *                 description: The weight of the items.
  *               harga_pengiriman:
  *                 type: number
  *                 description: The shipping cost.
- *               alamat:
+ *               nama_pengirim:
  *                 type: string
- *                 description: The delivery address.
+ *                 description: The name of the sender.
+ *               nama_penerima:
+ *                 type: string
+ *                 description: The name of the recipient.
+ *               alamat_asal:
+ *                 type: string
+ *                 description: The origin address.
+ *               no_telpon:
+ *                 type: string
+ *                 description: The contact number.
+ *               status:
+ *                 type: string
+ *                 enum:
+ *                   - proses
+ *                   - selesai
+ *                 description: The status of the order.
  *             example:
- *               jenis_layanan: "reguler"
+ *               jenis_layanan: "kilat"
+ *               alamat: "Denpasar"
  *               berat_barang: 20
- *               harga_pengiriman: 2000000
- *               alamat: "denpasar"
+ *               harga_pengiriman: 200000
+ *               nama_pengirim: "Gita"
+ *               nama_penerima: "Satya"
+ *               alamat_asal: "Jakarta"
+ *               no_telpon: "08213472364"
+ *               status: "proses"
  *     responses:
  *       201:
  *         description: Order entry created successfully.
@@ -266,23 +344,30 @@ router.route('/:receiptId').get(get)
  *                     id:
  *                       type: string
  *                       description: The unique identifier for the order entry.
- *                       example: "KKyivFFO2HmmkWXpVIWk3sVOb6Rfl4"
+ *                       example: "6f83d06c-a240-4988-97a6-5db9627bf34b"
  *                     jenis_layanan:
  *                       type: string
  *                       description: The type of service.
- *                       example: "reguler"
+ *                       example: "kilat"
  *                     tanggal_pengiriman:
  *                       type: string
  *                       description: The date and time of shipment.
- *                       example: "2023-10-04T15:23:54.056Z"
+ *                       example: "2023-10-06T10:57:50.389Z"
  *                     nomor_resi:
  *                       type: string
  *                       description: The shipment tracking number.
- *                       example: "RSV-29323112150241212634"
+ *                       example: "RSV-32273191922323335140"
+ *                     status:
+ *                       type: string
+ *                       enum:
+ *                         - proses
+ *                         - selesai
+ *                       description: The status of the order.
+ *                       example: "proses"
  *                     alamat:
  *                       type: string
  *                       description: The delivery address.
- *                       example: "denpasar"
+ *                       example: "Denpasar"
  *                     berat_barang:
  *                       type: number
  *                       description: The weight of the items.
@@ -290,31 +375,52 @@ router.route('/:receiptId').get(get)
  *                     harga_pengiriman:
  *                       type: number
  *                       description: The shipping cost.
- *                       example: 2000000
+ *                       example: 200000
+ *                     nama_pengirim:
+ *                       type: string
+ *                       description: The name of the sender.
+ *                       example: "Gita"
+ *                     nama_penerima:
+ *                       type: string
+ *                       description: The name of the recipient.
+ *                       example: "Satya"
+ *                     alamat_asal:
+ *                       type: string
+ *                       description: The origin address.
+ *                       example: "Jakarta"
+ *                     no_telpon:
+ *                       type: string
+ *                       description: The contact number.
+ *                       example: "08213472364"
  *                     createdAt:
  *                       type: string
  *                       format: date
  *                       description: The date and time when the order entry was created.
- *                       example: "2023-10-04T15:23:54.057Z"
+ *                       example: "2023-10-06T10:57:50.391Z"
  *                     updatedAt:
  *                       type: string
  *                       format: date
  *                       description: The date and time when the order entry was last updated.
- *                       example: "2023-10-04T15:23:54.057Z"
+ *                       example: "2023-10-06T10:57:50.391Z"
  *               example:
  *                 success: true
  *                 code: 201
  *                 message: "Successfully send data"
  *                 data:
- *                   id: "KKyivFFO2HmmkWXpVIWk3sVOb6Rfl4"
- *                   jenis_layanan: "reguler"
- *                   tanggal_pengiriman: "2023-10-04T15:23:54.056Z"
- *                   nomor_resi: "RSV-29323112150241212634"
- *                   alamat: "denpasar"
+ *                   id: "6f83d06c-a240-4988-97a6-5db9627bf34b"
+ *                   jenis_layanan: "kilat"
+ *                   tanggal_pengiriman: "2023-10-06T10:57:50.389Z"
+ *                   nomor_resi: "RSV-32273191922323335140"
+ *                   status: "proses"
+ *                   alamat: "Denpasar"
  *                   berat_barang: 20
- *                   harga_pengiriman: 2000000
- *                   createdAt: "2023-10-04T15:23:54.057Z"
- *                   updatedAt: "2023-10-04T15:23:54.057Z"
+ *                   harga_pengiriman: 200000
+ *                   nama_pengirim: "Gita"
+ *                   nama_penerima: "Satya"
+ *                   alamat_asal: "Jakarta"
+ *                   no_telpon: "08213472364"
+ *                   createdAt: "2023-10-06T10:57:50.391Z"
+ *                   updatedAt: "2023-10-06T10:57:50.391Z"
  */
 router.route('/').post(validator(paramValidation), add)
 
