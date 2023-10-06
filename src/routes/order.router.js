@@ -13,7 +13,7 @@ const paramValidation = {
     nama_pengirim: Joi.string().required(),
     nama_penerima: Joi.string().required(),
     alamat_asal: Joi.string().required(),
-    no_telpon: Joi.string().required()
+    no_telpon: Joi.string().required(),
   }),
 }
 /**

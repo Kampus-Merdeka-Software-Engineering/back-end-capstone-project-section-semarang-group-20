@@ -124,7 +124,7 @@ async function getByReceiptId(receiptId) {
     if (!data) {
       return resHandler(
         false,
-        httpStatus['NOT_FOUND'],
+        httpStatus.NOT_FOUND,
         'Order data not found!',
       )
     }

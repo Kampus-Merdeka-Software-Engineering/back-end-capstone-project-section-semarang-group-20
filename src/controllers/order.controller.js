@@ -1,10 +1,10 @@
-const httpStatus = require("http-status");
-const { uuid } = require("uuidv4");
-const Order = require("../models/order.model");
-const { createAPIError } = require("../utils/ApiError");
-const { resHandler } = require("../utils/handlers");
+const httpStatus = require('http-status')
+const { uuid } = require('uuidv4')
+const Order = require('../models/order.model')
+const { createAPIError } = require('../utils/ApiError')
+const { resHandler } = require('../utils/handlers')
 
-const { OrderModel, retrieveAll, getByReceiptId } = Order;
+const { OrderModel, retrieveAll, getByReceiptId } = Order
 
 /**
  * Handle an HTTP GET request to retrieve a list of items with optional pagination.
@@ -14,16 +14,17 @@ const { OrderModel, retrieveAll, getByReceiptId } = Order;
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
 async function list(req, res) {
-  const { limit = 10, skip = 0 } = req.query;
+  const { limit = 10, skip = 0 } = req.query
   try {
-    const data = await retrieveAll({ skip, limit });
-    return res.status(httpStatus.OK).json(data);
-  } catch (e) {
+    const data = await retrieveAll({ skip, limit })
+    return res.status(httpStatus.OK).json(data)
+  }
+  catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message);
-    return Promise.reject(err);
+    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message)
+    return Promise.reject(err)
   }
 }
 
@@ -35,16 +36,17 @@ async function list(req, res) {
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
 async function get(req, res) {
-  const { receiptId } = req.params;
+  const { receiptId } = req.params
   try {
-    const data = await getByReceiptId(receiptId);
-    return res.status(data.data !== undefined ? httpStatus.OK : httpStatus.NOT_FOUND).json(data);
-  } catch (e) {
+    const data = await getByReceiptId(receiptId)
+    return res.status(data.data !== undefined ? httpStatus.OK : httpStatus.NOT_FOUND).json(data)
+  }
+  catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
-    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message);
-    return Promise.reject(err);
+    const err = createAPIError(httpStatus.INTERNAL_SERVER_ERROR, e.message)
+    return Promise.reject(err)
   }
 }
 
@@ -65,20 +67,18 @@ async function add(req, res) {
     nama_penerima,
     alamat_asal,
     no_telpon,
-  } = req.body;
-  console.log(req.body)
-  console.log('hehe')
+  } = req.body
 
   const randomizeReceipt = () => {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let receipt = "RSV-";
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    let receipt = 'RSV-'
 
     for (let i = 0; i < 11; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      receipt += randomIndex;
+      const randomIndex = Math.floor(Math.random() * characters.length)
+      receipt += randomIndex
     }
-    return receipt;
-  };
+    return receipt
+  }
 
   try {
     const data = {
@@ -95,10 +95,9 @@ async function add(req, res) {
       alamat_asal,
       no_telpon,
       created_at: new Date(),
-    };
+    }
 
-
-    const createdData = await OrderModel.create(data);
+    const createdData = await OrderModel.create(data)
 
     return res
       .status(httpStatus.CREATED)
@@ -106,18 +105,19 @@ async function add(req, res) {
         resHandler(
           true,
           httpStatus.CREATED,
-          "Successfully send data",
-          createdData
-        )
-      );
-  } catch (e) {
+          'Successfully send data',
+          createdData,
+        ),
+      )
+  }
+  catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
      */
     console.error(e)
-    const err = createAPIError(httpStatus[500], e.message);
-    return Promise.reject(err);
+    const err = createAPIError(httpStatus[500], e.message)
+    return Promise.reject(err)
   }
 }
 
-module.exports = { list, add, get };
+module.exports = { list, add, get }

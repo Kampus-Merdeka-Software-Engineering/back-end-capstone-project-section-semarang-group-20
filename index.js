@@ -4,11 +4,11 @@ const { consola } = require('consola')
 const cors = require('cors')
 const swaggerJsdoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
+const httpStatus = require('http-status')
 const { getVariables } = require('./src/utils/getEnv')
 const router = require('./src/routes')
 const optionsDocs = require('./src/config/docs')
 const { ValidationError } = require('./src/utils/validator')
-const httpStatus = require('http-status')
 
 const app = express()
 const PORT = getVariables('PORT') || 3000
@@ -21,10 +21,9 @@ app.use(cors())
 app.use('/api', router)
 
 // api validation checker
-app.use(function(err, req, res, next) {
-  if (err instanceof ValidationError) {
+app.use((err, req, res, next) => {
+  if (err instanceof ValidationError)
     return res.status(err.statusCode).json(err)
-  }
 
   return res.status(httpStatus.INTERNAL_SERVER_ERROR).json(err)
 })
