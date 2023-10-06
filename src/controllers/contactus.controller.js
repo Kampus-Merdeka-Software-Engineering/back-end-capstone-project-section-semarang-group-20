@@ -40,7 +40,7 @@ async function get(req, res) {
   try {
     const data = await getOneData(id)
     return res
-      .status(data ? httpStatus.OK : httpStatus.NOT_FOUND)
+      .status(data.data !== undefined ? httpStatus.OK : httpStatus.NOT_FOUND)
       .json(data)
   }
   catch (e) {

@@ -4,7 +4,7 @@ const Order = require("../models/order.model");
 const { createAPIError } = require("../utils/ApiError");
 const { resHandler } = require("../utils/handlers");
 
-const { OrderModel, retrieveAll, getOneData } = Order;
+const { OrderModel, retrieveAll, getByReceiptId } = Order;
 
 /**
  * Handle an HTTP GET request to retrieve a list of items with optional pagination.
@@ -35,10 +35,10 @@ async function list(req, res) {
  * @returns {Promise<void>} A Promise that resolves when the response is sent.
  */
 async function get(req, res) {
-  const { id } = req.params;
+  const { receiptId } = req.params;
   try {
-    const data = await getOneData(id);
-    return res.status(data ? httpStatus.OK : httpStatus.NOT_FOUND).json(data);
+    const data = await getByReceiptId(receiptId);
+    return res.status(data.data !== undefined ? httpStatus.OK : httpStatus.NOT_FOUND).json(data);
   } catch (e) {
     /**
      * @type {import("../utils/ApiError").APIError}
@@ -86,6 +86,7 @@ async function add(req, res) {
       jenis_layanan,
       tanggal_pengiriman: new Date(),
       nomor_resi: randomizeReceipt(),
+      status: 'proses',
       alamat,
       berat_barang,
       harga_pengiriman,
@@ -114,7 +115,6 @@ async function add(req, res) {
      * @type {import("../utils/ApiError").APIError}
      */
     console.error(e)
-    console.log('hehe')
     const err = createAPIError(httpStatus[500], e.message);
     return Promise.reject(err);
   }

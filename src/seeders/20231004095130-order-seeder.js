@@ -16,6 +16,7 @@ module.exports = {
         nama_penerima: "Gita",
         alamat_asal: "Jakarta",
         no_telpon: "08221234542",
+        status: 'proses',
         created_at: new Date(),
         updated_at: new Date(),
       },

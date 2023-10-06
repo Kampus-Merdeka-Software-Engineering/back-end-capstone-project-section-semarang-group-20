@@ -17,6 +17,10 @@ const OrderModel = db.define(
       type: DataTypes.ENUM(['reguler', 'kilat']),
       allowNull: false,
     },
+    status: {
+      type: DataTypes.ENUM(['proses', 'selesai']),
+      allowNull: false,
+    },
     tanggal_pengiriman: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -107,21 +111,21 @@ async function retrieveAll({ skip = 0, limit = 10 }) {
  * Retrieve a single Order record by its ID.
  *
  * @async
- * @param {string} id - The unique identifier of the Order record to retrieve.
+ * @param {string} receiptId - The unique receipt id of the Order record to retrieve.
  * @returns {Promise<object>} A Promise that resolves to a response object containing the retrieved Order record.
  * @throws {import("../utils/ApiError").APIError} If an error occurs while retrieving the record or if the record is not found.
  */
-async function getOneData(id) {
+async function getByReceiptId(receiptId) {
   try {
     const data = await OrderModel.findOne({
-      where: { id },
+      where: { nomor_resi: receiptId },
     })
 
     if (!data) {
       return resHandler(
         false,
-        httpStatus.NOT_FOUND,
-        'Contact us data not found!',
+        httpStatus['NOT_FOUND'],
+        'Order data not found!',
       )
     }
 
@@ -139,5 +143,4 @@ async function getOneData(id) {
 /**
  * @typedef {import('sequelize').Model} OrderModel
  */
-
-module.exports = { OrderModel, retrieveAll, getOneData }
+module.exports = { OrderModel, retrieveAll, getByReceiptId }

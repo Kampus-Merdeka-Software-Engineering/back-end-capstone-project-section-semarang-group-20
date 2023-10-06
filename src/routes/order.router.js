@@ -11,7 +11,7 @@ const paramValidation = {
     berat_barang: Joi.number().required(),
     harga_pengiriman: Joi.number().required(),
     nama_pengirim: Joi.string().required(),
-    nama_peneirma: Joi.string().required(),
+    nama_penerima: Joi.string().required(),
     alamat_asal: Joi.string().required(),
     no_telpon: Joi.string().required()
   }),
@@ -205,7 +205,7 @@ router.route('/').get(list)
  *                   createdAt: "2023-10-04T10:07:05.000Z"
  *                   updatedAt: "2023-10-04T10:07:05.000Z"
  */
-router.route('/:id').get(get)
+router.route('/:receiptId').get(get)
 
 /**
  * @swagger
@@ -316,6 +316,6 @@ router.route('/:id').get(get)
  *                   createdAt: "2023-10-04T15:23:54.057Z"
  *                   updatedAt: "2023-10-04T15:23:54.057Z"
  */
-router.route('/').post(add)
+router.route('/').post(validator(paramValidation), add)
 
 module.exports = router
